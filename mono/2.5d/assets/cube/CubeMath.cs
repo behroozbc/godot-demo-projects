@@ -37,7 +37,7 @@ public partial class CubeMath : Node3D
 
         if (Input.IsActionJustPressed("view_cube_demo"))
         {
-            GetTree().ChangeScene("res://assets/demo_scene.tscn");
+            GetTree().ChangeSceneToFile("res://assets/demo_scene.tscn");
             return;
         }
 
@@ -48,7 +48,7 @@ public partial class CubeMath : Node3D
             RotateZ(delta * (Input.GetActionStrength("move_counterclockwise") - Input.GetActionStrength("move_clockwise")));
             if (Input.IsActionJustPressed("reset_position"))
             {
-                Transform = Transform3D.Identity;
+                Transform3D = Transform3D.Identity;
             }
             for (int i = 0; i < 27; i++)
             {

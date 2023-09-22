@@ -106,9 +106,9 @@ public partial class Gizmo25D : Node2D
     			movement *= -1;
             }
     		// Apply movement.
-            Transform3D t = spatialNode.Transform;
+            Transform3D t = spatialNode.Transform3D;
     		t.origin += t.basis[dominantAxis] * movement;
-            spatialNode.Transform = t;
+            spatialNode.Transform3D = t;
         }
     	else
         {
@@ -116,14 +116,14 @@ public partial class Gizmo25D : Node2D
     		GlobalPosition = node25d.GlobalPosition;
     		if (RoughlyRoundToPixels)
             {
-                Transform3D t = spatialNode.Transform;
+                Transform3D t = spatialNode.Transform3D;
     			t.origin = (t.origin * Node25D.SCALE).Round() / Node25D.SCALE;
-                spatialNode.Transform = t;
+                spatialNode.Transform3D = t;
             }
         }
     	// Move the gizmo lines appropriately.
     	linesRoot.GlobalPosition = node25d.GlobalPosition;
-    	node25d.PropertyListChangedNotify();
+    	node25d.NotifyPropertyListChanged();
     }
 
     // Initializes after _ready due to the onready vars, called manually in Viewport25D.gd.

@@ -47,7 +47,7 @@ public partial class ShadowMath25D : CharacterBody3D
         else
         {
             shadowRoot.Visible = true;
-            GlobalTransform = Transform;
+            GlobalTransform = Transform3D;
         }
     }
 }

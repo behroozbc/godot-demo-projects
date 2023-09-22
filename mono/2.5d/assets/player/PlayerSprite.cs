@@ -1,9 +1,4 @@
 using Godot;
-#if REAL_T_IS_DOUBLE
-using real_t = System.Double;
-#else
-using real_t = System.Single;
-#endif
 
 [Tool]
 public partial class PlayerSprite : Sprite2D
@@ -24,9 +19,9 @@ public partial class PlayerSprite : Sprite2D
         _parentMath = _parent.GetChild<PlayerMath25D>(0);
     }
 
-    public override void _Process(real_t delta)
+    public override void _Process(double delta)
     {
-	    if (Engine.EditorHint)
+	    if (Engine.IsEditorHint())
         {
 		    return; // Don't run this in the editor.
         }
@@ -34,25 +29,25 @@ public partial class PlayerSprite : Sprite2D
         bool movement = CheckMovement(); // Always run to get direction, but don't always use return bool.
 
         // Test-only move and collide, check if the player is on the ground.
-        var k = _parentMath.MoveAndCollide(Vector3.Down * 10 * delta, true, true, true);
+        var k = _parentMath.MoveAndCollide(Vector3.Down * 10 * (float)(delta), true, true, true);
         if (k != null)
         {
             if (movement)
             {
                 // TODO: https://github.com/godotengine/godot/issues/28748
                 Hframes = 6;
-                Texture = _run;
+                Texture2D = _run;
                 if (Input.IsActionPressed("movement_modifier"))
                 {
                     delta /= 2;
                 }
-                _progress = (_progress + FRAMERATE * delta) % 6;
+                _progress = (_progress + FRAMERATE * (float)(delta)) % 6;
                 Frame = _direction * 6 + (int)_progress;
             }
             else
             {
                 Hframes = 1;
-                Texture = _stand;
+                Texture2D = _stand;
                 _progress = 0;
                 Frame = _direction;
             }
@@ -60,7 +55,7 @@ public partial class PlayerSprite : Sprite2D
         else
         {
             Hframes = 2;
-            Texture = _jump;
+            Texture2D = _jump;
             _progress = 0;
             int jumping = _parentMath.verticalSpeed < 0 ? 1 : 0;
             Frame = _direction * 2 + jumping;
@@ -69,35 +64,35 @@ public partial class PlayerSprite : Sprite2D
 
     public void SetViewMode(int viewModeIndex)
     {
-        Transform2D t = Transform;
+        Transform2D t = Transform3D;
         switch (viewModeIndex)
         {
             case 0:
-                t.x = new Vector2(1, 0);
-                t.y = new Vector2(0, 0.75f);
+                t.X = new Vector2(1, 0);
+                t.Y = new Vector2(0, 0.75f);
                 break;
             case 1:
-                t.x = new Vector2(1, 0);
-                t.y = new Vector2(0, 1);
+                t.X = new Vector2(1, 0);
+                t.Y = new Vector2(0, 1);
                 break;
             case 2:
-                t.x = new Vector2(1, 0);
-                t.y = new Vector2(0, 0.5f);
+                t.X = new Vector2(1, 0);
+                t.Y = new Vector2(0, 0.5f);
                 break;
             case 3:
-                t.x = new Vector2(1, 0);
-                t.y = new Vector2(0, 1);
+                t.X = new Vector2(1, 0);
+                t.Y = new Vector2(0, 1);
                 break;
             case 4:
-                t.x = new Vector2(1, 0);
-                t.y = new Vector2(0.75f, 0.75f);
+                t.X = new Vector2(1, 0);
+                t.Y = new Vector2(0.75f, 0.75f);
                 break;
             case 5:
-                t.x = new Vector2(1, 0.25f);
-                t.y = new Vector2(0, 1);
+                t.X = new Vector2(1, 0.25f);
+                t.Y = new Vector2(0, 1);
                 break;
         }
-        Transform = t;
+        Transform3D = t;
     }
 
     /// <summary>
@@ -105,7 +100,7 @@ public partial class PlayerSprite : Sprite2D
     /// </summary>
     private void SpriteBasis()
     {
-        if (!Engine.EditorHint)
+        if (!Engine.IsEditorHint())
         {
             if (Input.IsActionPressed("forty_five_mode"))
             {

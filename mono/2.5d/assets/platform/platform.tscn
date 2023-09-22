@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/platform/platform_sprite.gd" type="Script" id=4]
 
 [sub_resource type="BoxShape3D" id=1]
-extents = Vector3(5, 0.5, 5)
+size = Vector3(5, 0.5, 5)
 
 [node name="Platform" type="Node2D"]
 z_index = -3954

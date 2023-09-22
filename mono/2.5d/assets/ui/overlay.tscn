@@ -14,7 +14,7 @@ offset_left = 348.0
 offset_top = 25.0
 offset_right = 1251.0
 offset_bottom = 175.0
-rect_min_size = Vector2(500, 50)
+custom_minimum_size = Vector2(500, 50)
 text = "
 Controls: WASD to move,  Space to jump,  R to reset,  Shift to walk,  T to toggle isometric controls,  C to view cube demo,  Tab to toggle hints.
 

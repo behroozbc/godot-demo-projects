@@ -28,7 +28,7 @@ public partial class PlayerMath25D : CharacterBody3D
 
         if (Input.IsActionJustPressed("view_cube_demo"))
         {
-            GetTree().ChangeScene("res://assets/cube/cube.tscn");
+            GetTree().ChangeSceneToFile("res://assets/cube/cube.tscn");
             return;
         }
 
@@ -39,7 +39,7 @@ public partial class PlayerMath25D : CharacterBody3D
 
         if (Input.IsActionPressed("reset_position"))
         {
-            Transform = new Transform3D(Basis.Identity, Vector3.Up * 10);
+            Transform3D = new Transform3D(Basis.Identity, Vector3.Up * 10);
             verticalSpeed = 0;
         }
         else
@@ -65,7 +65,7 @@ public partial class PlayerMath25D : CharacterBody3D
 
         // Gather player input and add directional movement to a Vector3 variable.
         Vector2 movementVec2 = Input.GetVector("move_left", "move_right", "move_forward", "move_back");
-        Vector3 moveDir = localX * movementVec2.x + localZ * movementVec2.y;
+        Vector3 moveDir = localX * movementVec2.X + localZ * movementVec2.Y;
 
         moveDir = moveDir * delta * 600;
         if (Input.IsActionPressed("movement_modifier"))

@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/player/PlayerSprite.cs" type="Script" id=5]
 
 [sub_resource type="BoxShape3D" id=1]
-extents = Vector3(0.5, 1, 0.5)
+size = Vector3(0.5, 1, 0.5)
 
 [node name="Player25D" type="Node2D"]
 position = Vector2(0, -226.274)
